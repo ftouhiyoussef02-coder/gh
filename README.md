@@ -1,1 +1,8 @@
-# gh
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+  document.write(navigator.language || navigator.userLanguage);
+</script>
+</body>
+</html>
