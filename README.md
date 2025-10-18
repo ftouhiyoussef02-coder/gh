@@ -28,7 +28,7 @@
     sendToThunkable("Langue détectée : " + userLang);
 
     // (Optionnel) Envoie aussi un message de test
-    sendToThunkable("hello world");
+   ThunkableWebviewerExtension.postMessage('hello world');
   </script>
 </body>
 </html>
