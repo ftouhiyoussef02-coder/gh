@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Lang Detector for Thunkable</title>
+  <!-- 🔗 Lien vers la bibliothèque Thunkable (OBLIGATOIRE pour communiquer) -->
+  <script src="https://thunkable.github.io/webviewer-extension/thunkableWebviewerExtension.js" type="text/javascript"></script>
 </head>
 <body>
   <h2>Détection automatique de la langue 🌐</h2>
   <p id="info">Détection en cours...</p>
 
   <script>
-    // Vérifie si on est bien dans un WebViewer Thunkable
+    // Fonction pour envoyer un message à Thunkable
     function sendToThunkable(message) {
       if (window.ThunkableWebviewerExtension && window.ThunkableWebviewerExtension.postMessage) {
         ThunkableWebviewerExtension.postMessage(message);
@@ -28,7 +30,7 @@
     sendToThunkable("Langue détectée : " + userLang);
 
     // (Optionnel) Envoie aussi un message de test
-   ThunkableWebviewerExtension.postMessage('hello world');
+    sendToThunkable("hello world");
   </script>
 </body>
 </html>
