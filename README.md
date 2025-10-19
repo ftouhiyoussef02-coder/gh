@@ -28,9 +28,6 @@
 
     // Étape 3 : envoyer cette info à Thunkable
     sendToThunkable("Langue détectée : " + userLang);
-
-    // (Optionnel) Envoie aussi un message de test
-    sendToThunkable("hello world");
   </script>
 </body>
 </html>
