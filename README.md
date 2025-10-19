@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Lang Detector for Thunkable</title>
-  <!-- 🔗 Lien vers la bibliothèque Thunkable (OBLIGATOIRE pour communiquer) -->
+  <!-- Script nécessaire pour la communication avec Thunkable -->
   <script src="https://thunkable.github.io/webviewer-extension/thunkableWebviewerExtension.js" type="text/javascript"></script>
 </head>
 <body>
@@ -11,7 +11,7 @@
   <p id="info">Détection en cours...</p>
 
   <script>
-    // Fonction pour envoyer un message à Thunkable
+    // Fonction d'envoi à Thunkable
     function sendToThunkable(message) {
       if (window.ThunkableWebviewerExtension && window.ThunkableWebviewerExtension.postMessage) {
         ThunkableWebviewerExtension.postMessage(message);
@@ -20,15 +20,32 @@
       }
     }
 
-    // Étape 1 : détecter la langue du device/navigateur
-    const userLang = navigator.language || navigator.userLanguage; // ex: "fr-FR", "ar-TN", "en-US"
+    // Étape 1 : détecter la langue du navigateur
+    const userLang = (navigator.language || navigator.userLanguage || "").toLowerCase(); // ex: "fr-FR"
 
-    // Étape 2 : afficher l’info à l’écran
-    document.getElementById("info").innerHTML = "Langue détectée : <b>" + userLang + "</b>";
+    // Étape 2 : déterminer la langue parmi les principales
+    let detectedLang = "";
 
-    // Étape 3 : envoyer cette info à Thunkable
-    sendToThunkable("Langue détectée : " + userLang);
+    if (userLang.startsWith("ar")) {
+      detectedLang = "arabe";
+    } else if (userLang.startsWith("zh")) {
+      detectedLang = "chinois";
+    } else if (userLang.startsWith("fr")) {
+      detectedLang = "français";
+    } else if (userLang.startsWith("en")) {
+      detectedLang = "anglais";
+    } else {
+      detectedLang = "autre (" + userLang + ")";
+    }
+
+    // Étape 3 : afficher la langue détectée
+    document.getElementById("info").innerHTML = "Langue détectée : <b>" + detectedLang + "</b>";
+
+    // Étape 4 : envoyer la langue à Thunkable
+    sendToThunkable(detectedLang);
   </script>
 </body>
+</html>
+
 </html>
 
